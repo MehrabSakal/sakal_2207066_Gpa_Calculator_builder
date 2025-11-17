@@ -7,9 +7,9 @@
 <AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1"
             fx:controller="com.example.sakal_2207066_gpa_calculator_builder.HelloController">
     <Label layoutX="20.0" layoutY="14.0" text="GPA Result" style="-fx-font-size:18px; -fx-font-weight:bold;"/>
-    <Label fx:id="gpaLabel" layoutX="20.0" layoutY="50.0" text="GPA: "/>
+    <Label fx:id="gpaLabel" layoutX="20.0" layoutY="50.0" text="GPA: " styleClass="title-label"/>
     <TextArea fx:id="resultSummary" layoutX="20.0" layoutY="90.0" prefHeight="250.0" prefWidth="560.0" editable="false"
               wrapText="true"/>
     <Button fx:id="restartButton" layoutX="480.0" layoutY="350.0" mnemonicParsing="false" onAction="#onRestartClick"
-            text="Restart"/>
+            text="Restart" styleClass="primary-button"/>
 </AnchorPane>

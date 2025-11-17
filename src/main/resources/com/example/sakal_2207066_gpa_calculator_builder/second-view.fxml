@@ -9,20 +9,20 @@
 <AnchorPane prefHeight="500.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1"
             fx:controller="com.example.sakal_2207066_gpa_calculator_builder.HelloController">
     <TextField fx:id="courseNameField" layoutX="14.0" layoutY="40.0" prefHeight="26.0" prefWidth="140.0"
-               promptText="Course Name"/>
+               promptText="Course Name" styleClass="text-field"/>
     <TextField fx:id="courseCodeField" layoutX="160.0" layoutY="40.0" prefHeight="26.0" prefWidth="100.0"
-               promptText="Course Code"/>
+               promptText="Course Code" styleClass="text-field"/>
     <TextField fx:id="creditField" layoutX="270.0" layoutY="40.0" prefHeight="26.0" prefWidth="60.0"
-               promptText="Credit"/>
+               promptText="Credit" styleClass="text-field"/>
     <TextField fx:id="teacher1Field" layoutX="340.0" layoutY="40.0" prefHeight="26.0" prefWidth="120.0"
-               promptText="Teacher 1"/>
+               promptText="Teacher 1" styleClass="text-field"/>
     <TextField fx:id="teacher2Field" layoutX="470.0" layoutY="40.0" prefHeight="26.0" prefWidth="120.0"
-               promptText="Teacher 2"/>
+               promptText="Teacher 2" styleClass="text-field"/>
     <TextField fx:id="gradeField" layoutX="600.0" layoutY="40.0" prefHeight="26.0" prefWidth="80.0"
-               promptText="Grade (A, B+...)"/>
+               promptText="Grade (A, B+...)" styleClass="text-field"/>
 
     <Button fx:id="addCourseButton" layoutX="690.0" layoutY="40.0" mnemonicParsing="false" onAction="#OnAddCourseClick"
-            prefHeight="26.0" prefWidth="80.0" text="ADD"/>
+            prefHeight="26.0" prefWidth="80.0" text="ADD" styleClass="primary-button"/>
     <TableView fx:id="courseTable" layoutX="14.0" layoutY="90.0" prefHeight="320.0" prefWidth="760.0">
         <columns>
             <TableColumn fx:id="colName" prefWidth="180.0" text="Course Name"/>
@@ -35,7 +35,7 @@
     </TableView>
 
     <Button fx:id="calculateid" layoutX="260.0" layoutY="430.0" mnemonicParsing="false"
-            onAction="#OnCalculateButtonClick" prefHeight="34.0" prefWidth="280.0" text="CALCULATE"/>
+            onAction="#OnCalculateButtonClick" prefHeight="34.0" prefWidth="280.0" text="CALCULATE" styleClass="primary-button"/>
     <Label layoutX="14.0" layoutY="470.0" text="Total Credits entered:">
         <font/>
     </Label>
