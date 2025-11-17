@@ -1,19 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
-
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextArea?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.text.Font?>
 
-
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.sakal_2207066_gpa_calculator_builder.HelloController">
-   <children>
-      <Button fx:id="yes" layoutX="282.0" layoutY="323.0" mnemonicParsing="false" onAction="#onYesButtonClick" text="YES" />
-      <Label fx:id="cgpatitle" layoutX="208.0" layoutY="36.0" prefHeight="62.0" prefWidth="184.0" text="YOUR CALCULATED CGPA IS:">
-         <font>
-            <Font size="14.0" />
-         </font>
-      </Label>
-      <Label layoutX="208.0" layoutY="275.0" prefHeight="32.0" prefWidth="190.0" text="If you want calculate again click yes" />
-   </children>
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="com.example.sakal_2207066_gpa_calculator_builder.HelloController">
+    <Label layoutX="20.0" layoutY="14.0" text="GPA Result" style="-fx-font-size:18px; -fx-font-weight:bold;"/>
+    <Label fx:id="gpaLabel" layoutX="20.0" layoutY="50.0" text="GPA: "/>
+    <TextArea fx:id="resultSummary" layoutX="20.0" layoutY="90.0" prefHeight="250.0" prefWidth="560.0" editable="false"
+              wrapText="true"/>
+    <Button fx:id="restartButton" layoutX="480.0" layoutY="350.0" mnemonicParsing="false" onAction="#onRestartClick"
+            text="Restart"/>
 </AnchorPane>

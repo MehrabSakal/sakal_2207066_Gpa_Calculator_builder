@@ -4,12 +4,16 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
-
+<?import javafx.scene.text.Font?>
 
 <AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.sakal_2207066_gpa_calculator_builder.HelloController">
-   <children>
-      <Label fx:id="creditlabel" layoutX="242.0" layoutY="133.0" text="ENTER TOTAL CREDIT" />
-      <TextField fx:id="creditamount" layoutX="226.0" layoutY="165.0" />
-      <Button fx:id="creditbutton" layoutX="274.0" layoutY="227.0" mnemonicParsing="false" onAction="#onEnterButtonClick" text="ENTER" />
-   </children>
+    <Label fx:id="creditlabel" layoutX="203.0" layoutY="63.0" text="ENTER TOTAL CREDIT" textFill="#779ca6">
+      <font>
+         <Font name="System Bold" size="19.0" />
+      </font></Label>
+    <TextField fx:id="creditamount" layoutX="203.0" layoutY="127.0" prefHeight="36.0" prefWidth="195.0" promptText="              Enter Total Credit" />
+    <Button fx:id="creditbutton" layoutX="253.0" layoutY="200.0" mnemonicParsing="false" onAction="#onEnterButtonClick" prefHeight="26.0" prefWidth="96.0" style="-fx-background-color: pink;" text="ENTER" textFill="#295340">
+      <font>
+         <Font size="13.0" />
+      </font></Button>
 </AnchorPane>
