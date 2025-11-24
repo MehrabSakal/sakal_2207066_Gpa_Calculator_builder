@@ -3,6 +3,12 @@ module com.example.sakal_2207066_gpa_calculator_builder {
     requires javafx.fxml;
     requires javafx.web;
 
+    requires com.fasterxml.jackson.databind;
+
+    opens com.example.sakal_2207066_gpa_calculator_builder to javafx.fxml, com.fasterxml.jackson.databind;
+
+    exports com.example.sakal_2207066_gpa_calculator_builder;
+
     requires org.controlsfx.controls;
     requires com.dlsc.formsfx;
     requires net.synedra.validatorfx;
@@ -10,7 +16,6 @@ module com.example.sakal_2207066_gpa_calculator_builder {
     requires org.kordamp.bootstrapfx.core;
     requires eu.hansolo.tilesfx;
     requires com.almasb.fxgl.all;
+    requires java.sql;
 
-    opens com.example.sakal_2207066_gpa_calculator_builder to javafx.fxml;
-    exports com.example.sakal_2207066_gpa_calculator_builder;
 }
