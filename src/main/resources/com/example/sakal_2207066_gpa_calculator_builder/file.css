@@ -70,3 +70,39 @@
 .table-row-cell:filled:hover {
     -fx-background-color: #e8f5e9;
 }
+
+.table-view {
+    -fx-base: white;
+    -fx-control-inner-background: white;
+    -fx-background-color: white;
+    -fx-table-cell-border-color: transparent;
+    -fx-table-header-border-color: transparent;
+    -fx-padding: 5;
+}
+
+.table-view .column-header-background {
+    -fx-background-color: #ecf0f1;
+    -fx-background-insets: 0 0 1 0;
+}
+
+.table-view .column-header, .table-view .filler {
+    -fx-background-color: transparent;
+    -fx-size: 35;
+    -fx-border-width: 0 0 1 0;
+    -fx-border-color: #bdc3c7;
+}
+
+.table-view .column-header .label {
+    -fx-text-fill: #7f8c8d;
+    -fx-font-weight: bold;
+    -fx-alignment: center-left;
+}
+
+.table-row-cell:filled:selected {
+    -fx-background-color: #e8f6fd; /* Light Blue Selection */
+    -fx-background-insets: 0;
+}
+
+.table-row-cell:filled:selected .text {
+    -fx-fill: #2980b9;
+}
