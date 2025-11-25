@@ -5,6 +5,9 @@ module com.example.sakal_2207066_gpa_calculator_builder {
 
     requires com.fasterxml.jackson.databind;
 
+    requires java.sql;               // REQUIRED for Database
+    requires org.xerial.sqlitejdbc;
+
     opens com.example.sakal_2207066_gpa_calculator_builder to javafx.fxml, com.fasterxml.jackson.databind;
 
     exports com.example.sakal_2207066_gpa_calculator_builder;
@@ -16,6 +19,5 @@ module com.example.sakal_2207066_gpa_calculator_builder {
     requires org.kordamp.bootstrapfx.core;
     requires eu.hansolo.tilesfx;
     requires com.almasb.fxgl.all;
-    requires java.sql;
 
 }

@@ -1,75 +1,94 @@
 package com.example.sakal_2207066_gpa_calculator_builder;
 
-import com.fasterxml.jackson.core.type.TypeReference;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import java.io.File;
-import java.io.IOException;
+import java.sql.*;
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.List;
 
 public class DatabaseHandler {
 
-    private static final String FILE_PATH = "gpa_data.json";
-    private static final ObjectMapper mapper = new ObjectMapper();
+    // This string creates the .db file automatically
+    private static final String DB_URL = "jdbc:sqlite:student_gpa.db";
 
     public static void initDB() {
-        File file = new File(FILE_PATH);
-        if (!file.exists()) {
-            try {
-                mapper.writeValue(file, new ArrayList<StudentResult>());
-            } catch (IOException e) {
-                e.printStackTrace();
+        try {
+            // Force load the driver to prevent "No suitable driver" error
+            Class.forName("org.sqlite.JDBC");
+
+            String sql = "CREATE TABLE IF NOT EXISTS results (" +
+                    "id INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                    "name TEXT, " +
+                    "gpa REAL, " +
+                    "date TEXT)";
+
+            try (Connection conn = DriverManager.getConnection(DB_URL);
+                 Statement stmt = conn.createStatement()) {
+                stmt.execute(sql);
+                System.out.println("Database initialized successfully.");
             }
+        } catch (ClassNotFoundException e) {
+            System.out.println("SQLite Driver NOT FOUND! Check pom.xml");
+            e.printStackTrace();
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
     }
 
     public static void addResult(String name, double gpa) {
-        List<StudentResult> list = loadFromFile();
-        int newId = list.stream().mapToInt(StudentResult::getId).max().orElse(0) + 1;
-        list.add(new StudentResult(newId, name, gpa, LocalDate.now().toString()));
-        saveToFile(list);
+        String sql = "INSERT INTO results(name, gpa, date) VALUES(?, ?, ?)";
+        try (Connection conn = DriverManager.getConnection(DB_URL);
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            pstmt.setString(1, name);
+            pstmt.setDouble(2, gpa);
+            pstmt.setString(3, LocalDate.now().toString());
+            pstmt.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 
     public static ObservableList<StudentResult> getAllResults() {
-        return FXCollections.observableArrayList(loadFromFile());
+        ObservableList<StudentResult> list = FXCollections.observableArrayList();
+        String sql = "SELECT * FROM results ORDER BY id DESC";
+
+        try (Connection conn = DriverManager.getConnection(DB_URL);
+             Statement stmt = conn.createStatement();
+             ResultSet rs = stmt.executeQuery(sql)) {
+
+            while (rs.next()) {
+                list.add(new StudentResult(
+                        rs.getInt("id"),
+                        rs.getString("name"),
+                        rs.getDouble("gpa"),
+                        rs.getString("date")
+                ));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return list;
     }
 
     public static void updateResult(int id, String newName, double newGpa) {
-        List<StudentResult> list = loadFromFile();
-        for (StudentResult s : list) {
-            if (s.getId() == id) {
-                s.setName(newName);
-                s.setGpa(newGpa);
-                break;
-            }
+        String sql = "UPDATE results SET name = ?, gpa = ? WHERE id = ?";
+        try (Connection conn = DriverManager.getConnection(DB_URL);
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            pstmt.setString(1, newName);
+            pstmt.setDouble(2, newGpa);
+            pstmt.setInt(3, id);
+            pstmt.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
-        saveToFile(list);
     }
 
     public static void deleteResult(int id) {
-        List<StudentResult> list = loadFromFile();
-        list.removeIf(s -> s.getId() == id);
-        saveToFile(list);
-    }
-
-    private static List<StudentResult> loadFromFile() {
-        File file = new File(FILE_PATH);
-        if (!file.exists()) return new ArrayList<>();
-        try {
-            return mapper.readValue(file, new TypeReference<List<StudentResult>>(){});
-        } catch (IOException e) {
-            e.printStackTrace();
-            return new ArrayList<>();
-        }
-    }
-
-    private static void saveToFile(List<StudentResult> list) {
-        try {
-            mapper.writerWithDefaultPrettyPrinter().writeValue(new File(FILE_PATH), list);
-        } catch (IOException e) {
+        String sql = "DELETE FROM results WHERE id = ?";
+        try (Connection conn = DriverManager.getConnection(DB_URL);
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            pstmt.setInt(1, id);
+            pstmt.executeUpdate();
+        } catch (SQLException e) {
             e.printStackTrace();
         }
     }
